@@ -119,7 +119,7 @@
     <Compile Include="Helpers\AttachSolver.cs" />
     <Compile Include="Helpers\AvatarFactory.cs" />
     <Compile Include="Helpers\ComparableJsonContainer.cs" />
-    <Compile Include="Helpers\MyHTMLSolver.cs" />
+    <Compile Include="Helpers\HtmlHelper.cs" />
     <Compile Include="Helpers\SessionControl.cs" />
     <Compile Include="Helpers\WebViewAutoFit.cs" />
     <Compile Include="MainPage.xaml.cs">

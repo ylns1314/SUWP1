@@ -145,7 +145,7 @@ namespace SUWP1.UI
         {
             //string clean = Windows.Data.Html.HtmlUtilities.ConvertToText(input);
             //clean = System.Net.WebUtility.HtmlEncode(clean);
-            string clean = Helpers.MyHTMLSolver.removeHTMLCharEntities(input);
+            string clean = Helpers.HtmlHelper.ReplaceHtmlCharEntities(input);
             if (clean == "\0")
                 clean = "\n";
             return clean;

@@ -65,7 +65,7 @@ namespace SUWP1.WebClient
             {
                 Structures.Forum f = new Structures.Forum();
                 f.fid = tmp["fid"].GetString();
-                f.name = Helpers.MyHTMLSolver.removeHTMLCharEntities(tmp["name"].GetString());
+                f.name = Helpers.HtmlHelper.ReplaceHtmlCharEntities(tmp["name"].GetString());
                 result.Add(f);
             }
             //result += "numForum = " + joW["Variables"].GetObject()["forumlist"].GetArray().Count + "\n";
@@ -104,12 +104,12 @@ namespace SUWP1.WebClient
                 t.tid = tuple.obj["tid"].GetString();
                 t.fid = fid.ToString();
                 t.authorid = tuple.obj["authorid"].GetString();
-                t.author = Helpers.MyHTMLSolver.removeHTMLCharEntities(tuple.obj["author"].GetString());
-                t.subject = Helpers.MyHTMLSolver.removeHTMLCharEntities(tuple.obj["subject"].GetString());
-                t.lastpost = Helpers.MyHTMLSolver.removeHTMLCharEntities(tuple.obj["lastpost"].GetString());
-                t.lastposter = Helpers.MyHTMLSolver.removeHTMLCharEntities(tuple.obj["lastposter"].GetString());
-                t.dateline = Helpers.MyHTMLSolver.removeHTMLCharEntities(tuple.obj["dateline"].GetString());
-                t.replies = Helpers.MyHTMLSolver.removeHTMLCharEntities(tuple.obj["replies"].GetString());
+                t.author = Helpers.HtmlHelper.ReplaceHtmlCharEntities(tuple.obj["author"].GetString());
+                t.subject = Helpers.HtmlHelper.ReplaceHtmlCharEntities(tuple.obj["subject"].GetString());
+                t.lastpost = Helpers.HtmlHelper.ReplaceHtmlCharEntities(tuple.obj["lastpost"].GetString());
+                t.lastposter = Helpers.HtmlHelper.ReplaceHtmlCharEntities(tuple.obj["lastposter"].GetString());
+                t.dateline = Helpers.HtmlHelper.ReplaceHtmlCharEntities(tuple.obj["dateline"].GetString());
+                t.replies = Helpers.HtmlHelper.ReplaceHtmlCharEntities(tuple.obj["replies"].GetString());
                 result.Add(t);
             }
             return result;
@@ -139,9 +139,9 @@ namespace SUWP1.WebClient
                 // replace all img attachments with real urls
                 string resultTmp = Helpers.AttachSolver.solve(tuple.obj);
                 // replace all html char entities
-                resultTmp = Helpers.MyHTMLSolver.removeHTMLCharEntities(resultTmp);
+                resultTmp = Helpers.HtmlHelper.ReplaceHtmlCharEntities(resultTmp);
                 // replace <br> with <br/> and <img ...> with <img .../>
-                resultTmp = Helpers.MyHTMLSolver.completeTags(resultTmp);
+                resultTmp = Helpers.HtmlHelper.CompleteTags(resultTmp);
 
                 Structures.Post p = new Structures.Post();
                 p.htmlMsg = resultTmp;
@@ -149,10 +149,10 @@ namespace SUWP1.WebClient
                 p.strUriAvatar_s = Helpers.AvatarFactory.getAvatar(tuple.obj["authorid"].GetString(), false);
                 p.tid = tuple.obj["tid"].GetString();
                 p.authorid = tuple.obj["authorid"].GetString();
-                p.author = Helpers.MyHTMLSolver.removeHTMLCharEntities(tuple.obj["author"].GetString());
-                p.dateline = Helpers.MyHTMLSolver.removeHTMLCharEntities(tuple.obj["dateline"].GetString());
-                p.memberstatus = Helpers.MyHTMLSolver.removeHTMLCharEntities(tuple.obj["memberstatus"].GetString());
-                p.status = Helpers.MyHTMLSolver.removeHTMLCharEntities(tuple.obj["status"].GetString());
+                p.author = Helpers.HtmlHelper.ReplaceHtmlCharEntities(tuple.obj["author"].GetString());
+                p.dateline = Helpers.HtmlHelper.ReplaceHtmlCharEntities(tuple.obj["dateline"].GetString());
+                p.memberstatus = Helpers.HtmlHelper.ReplaceHtmlCharEntities(tuple.obj["memberstatus"].GetString());
+                p.status = Helpers.HtmlHelper.ReplaceHtmlCharEntities(tuple.obj["status"].GetString());
                 result.Add(p);
             }
             return result;

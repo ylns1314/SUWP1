@@ -11,14 +11,15 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace SUWP1.Helpers
 {
-    static class MyHTMLSolver
+    static class HtmlHelper
     {
         /// <summary>
-        /// Remove HTML Chararcter entities in the given html text
+        /// Replace HTML Chararcter entities in the given html text
+        /// to corresponding symbolds.
         /// </summary>
         /// <param name="htmlText"></param>
         /// <returns>the clean version of htmlText</returns>
-        public static string removeHTMLCharEntities(string htmlText)
+        public static string ReplaceHtmlCharEntities(string htmlText)
         {
             htmlText = htmlText.Replace("&nbsp;", " ");
             htmlText = htmlText.Replace("&lt;", "<");
@@ -34,7 +35,12 @@ namespace SUWP1.Helpers
             return htmlText;
         }
 
-        public static string completeTags(string htmlText)
+        /// <summary>
+        /// Add "&lt;" to all unclosed "&gt;".
+        /// </summary>
+        /// <param name="htmlText"></param>
+        /// <returns></returns>
+        public static string CompleteTags(string htmlText)
         {
             // regex for all > without /
             Regex tagQuoteEnd = new Regex(@"(?!\/)>");
