@@ -1,0 +1,88 @@
+﻿<Page
+    x:Class="SUWP1.DebugPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SUWP1"
+    xmlns:struct="using:SUWP1.Structures"
+    xmlns:ui="using:SUWP1.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Name="stackPToolbar" Grid.Row="0" Orientation="Horizontal" Background="AliceBlue">
+            <Button Name="btnBack" Background="RoyalBlue" Content="Back" Click="btnBack_Click"  Margin="20,20,0,0" />
+            <Button Name="btnLogin" Content="Login" Click="btnLogin_Click"  Margin="20,20,0,0" />
+            <Button Name="btnForumList" Content="Get Forum List" Click="btnForumList_Click"  Margin="20,20,0,0" />
+            <Button Name="btnAuth" Content="Get Auth Info" Click="btnAuth_Click"  Margin="20,20,0,0" />
+            <StackPanel Orientation="Horizontal" Margin="40,0,0,0">
+                <TextBox Name="tbFid" InputScope="AlphanumericFullWidth" Margin="20,20,0,0" Text="51"></TextBox>
+                <Button Name="btnThreadList" Content="Get Thread List" Margin="20,20,0,0" Click="btnThreadList_Click"></Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="40,0,0,0">
+                <TextBox Name="tbTid" InputScope="AlphanumericFullWidth" Margin="20,20,0,0" Text="1317876"></TextBox>
+                <Button Name="btnPostList" Content="Get Post List" Margin="20,20,0,0" Click="btnPostList_Click"></Button>
+            </StackPanel>
+        </StackPanel>
+        <ListView Name="lvPostList" Grid.Row="1" Width="auto" MinHeight="200" Margin="10,10,10,10" ItemsSource="{x:Bind postList}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="struct:Post">
+                    <Border BorderThickness="1">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="#FF0B0202"/>
+                        </Border.BorderBrush>
+                        <Grid Width="{Binding ActualWidth, ElementName=lvPostList}" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Vertical" Width="200">
+                                <Image Width="150" Margin="10,10,10,10" Source="{x:Bind strUriAvatar}"></Image>
+                                <TextBlock Text="{x:Bind author}" HorizontalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                            <!--<TextBlock Grid.Column="1" Name="tbPostMsg" Text="{Binding htmlMsg}"></TextBlock>-->
+                            <!--<mt:HtmlView Grid.Column="1" Name="hvConsole" Html="{Binding htmlMsg}" MinHeight="150" Height="auto"></mt:HtmlView>-->
+                            <!--<RichTextBlock Grid.Column="1" Name="hvConsole"  MinHeight="150" Height="auto" ui:CustomProperties.Html="{Binding htmlMsg}"></RichTextBlock>-->
+                            <WebView Grid.Column="1" MinHeight="150" Height="auto" Margin="10,0,10,0" ui:CustomProperties.HTMLText="{Binding htmlMsg}" NavigationCompleted="wvPostMsg_NavigationCompleted"></WebView>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView Name="RTBPostList" Grid.Row="2" Width="auto" Margin="10,10,10,10" ItemsSource="{x:Bind viewModel.posts}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="struct:Post">
+                    <Border BorderThickness="1">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="#FF0B0202"/>
+                        </Border.BorderBrush>
+                        <Grid Width="{Binding ActualWidth, ElementName=lvPostList}" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Vertical" Width="200">
+                                <Image Width="150" Margin="10,10,10,10" Source="{x:Bind strUriAvatar}"></Image>
+                                <TextBlock Text="{x:Bind author}" HorizontalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                            <!--<TextBlock Name="tbPostMsg" Text="{Binding htmlMsg}"></TextBlock>
+                            <mt:HtmlView Grid.Column="1" Name="hvConsole" Html="{Binding htmlMsg}" MinHeight="150" Height="auto"></mt:HtmlView>-->
+                            <RichTextBlock Grid.Column="1"  MinHeight="150" Height="auto" ui:CustomProperties.Html="{x:Bind htmlMsg}" ></RichTextBlock>
+                            <!--<WebView Grid.Column="1" MinHeight="150" MaxWidth="{Binding wbPostMaxWidth}" Height="auto" Name="wvPostMsg" Margin="10,0,10,0" ui:CustomProperties.HTMLText="{Binding htmlMsg}" NavigationCompleted="wvPostMsg_NavigationCompleted"></WebView>-->
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <!--<ScrollViewer Height="250" Width="auto" Margin="100,10,100,100">
+            
+        <TextBlock Name="tbConsole" Height="auto" Text="{x:Bind console}" TextWrapping="Wrap" Margin="20,0,20,0" />
+        
+            <WebView Name="wvPost" Height="300" Width="auto" Margin="20,0,20,0"></WebView>
+        </ScrollViewer>-->
+    </Grid>
+</Page>
