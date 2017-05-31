@@ -131,7 +131,7 @@
     <Compile Include="Structures\Thread.cs" />
     <Compile Include="Structures\Forum.cs" />
     <Compile Include="Helpers\HexColorSolver.cs" />
-    <Compile Include="UI\CustomProperties.cs" />
+    <Compile Include="UI\HtmlToXamlProperties.cs" />
     <Compile Include="UI\RTBPost.cs" />
     <Compile Include="UI\ViewModelForum.cs" />
     <Compile Include="UI\ViewModelSubForum.cs" />

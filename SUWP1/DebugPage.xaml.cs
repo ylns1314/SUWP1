@@ -39,7 +39,7 @@ namespace SUWP1
             this.viewModel = new UI.ViewModelThread();
             jh = new WebClient.JsonHandler();
             console = "click any buttons";
-            HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
+            var filter = new HttpBaseProtocolFilter();
             wbPostMaxWidth = lvPostList.ActualWidth - 200;
             this.Bindings.Update();
         }
@@ -68,7 +68,7 @@ namespace SUWP1
 
         private async void btnThreadList_Click(object sender, RoutedEventArgs e)
         {
-            int fid = Int32.Parse(tbFid.Text);
+            var fid = Int32.Parse(tbFid.Text);
             //console = await jh.getThreadList(fid, 1);
             this.Bindings.Update();
         }
@@ -81,10 +81,10 @@ namespace SUWP1
 
         private async void btnPostList_Click(object sender, RoutedEventArgs e)
         {
-            int fid = Int32.Parse(tbFid.Text);
-            int tid = Int32.Parse(tbTid.Text);
+            var fid = Int32.Parse(tbFid.Text);
+            var tid = Int32.Parse(tbTid.Text);
             //viewModel.addPosts(tid, 1);
-            int indexLast = (postList.Count == 0) ? 0 : postList.Count - 1;
+            var indexLast = (postList.Count == 0) ? 0 : postList.Count - 1;
             Debug.WriteLine("numPosts = " + postList.Count);
             //wvPost.NavigateToString(postList[indexLast].htmlMsg);
             this.Bindings.Update();

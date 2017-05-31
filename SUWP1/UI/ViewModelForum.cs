@@ -17,7 +17,7 @@ namespace SUWP1.UI
 
         public async void addForums()
         {
-            List<Forum> lstForums = await jh.getForumList();
+            var lstForums = await jh.getForumList();
             forums = new ObservableCollection<Forum>(lstForums);
         }
     }

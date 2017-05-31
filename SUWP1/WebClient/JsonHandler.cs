@@ -25,7 +25,7 @@ namespace SUWP1.WebClient
 
         public JsonHandler()
         {
-            HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
+            var filter = new HttpBaseProtocolFilter();
             filter.CacheControl.ReadBehavior = HttpCacheReadBehavior.MostRecent;
             hc = new HttpClient(filter);
             loaderURL = ResourceLoader.GetForCurrentView("S1APIs");
@@ -38,9 +38,9 @@ namespace SUWP1.WebClient
 
         public async Task<string> getAuth()
         {
-            string result = "";
-            string url_auth = strUrlBaseApi + strAuth;
-            string strJsoning = await hc.GetStringAsync(new Uri(url_auth));
+            var result = "";
+            var url_auth = strUrlBaseApi + strAuth;
+            var strJsoning = await hc.GetStringAsync(new Uri(url_auth));
             Debug.WriteLine(strJsoning);
             result += strJsoning + "\n";
             return result;
@@ -48,22 +48,22 @@ namespace SUWP1.WebClient
 
         public async Task<string> login(string username, string pwd)
         {
-            string result = await Helpers.SessionControl.Login(username, pwd);
+            var result = await Helpers.SessionControl.Login(username, pwd);
             return result;
         }
 
         public async Task<List<Structures.Forum>> getForumList()
         {
-            List<Structures.Forum> result = new List<Structures.Forum>();
-            string strJsoning = await hc.GetStringAsync(new Uri(strUrlBaseApi + strForumList));
+            var result = new List<Structures.Forum>();
+            var strJsoning = await hc.GetStringAsync(new Uri(strUrlBaseApi + strForumList));
             Debug.WriteLine(strJsoning);
-            JsonObject jo = JsonObject.Parse(strJsoning);
-            JsonArray forumsArray = jo["Variables"].GetObject()["forumlist"].GetArray();
-            int numForums = forumsArray.Count;
+            var jo = JsonObject.Parse(strJsoning);
+            var forumsArray = jo["Variables"].GetObject()["forumlist"].GetArray();
+            var numForums = forumsArray.Count;
 
             foreach (JsonObject tmp in forumsArray)
             {
-                Structures.Forum f = new Structures.Forum();
+                var f = new Structures.Forum();
                 f.fid = tmp["fid"].GetString();
                 f.name = Helpers.HtmlHelper.ReplaceHtmlCharEntities(tmp["name"].GetString());
                 result.Add(f);
@@ -80,26 +80,26 @@ namespace SUWP1.WebClient
         public async Task<List<Structures.Thread>> getThreadList(int fid, int numPage)
         {
 
-            string strUrl = strUrlBaseApi + strThreadList + "&fid=" + fid + "&tpp=" + tpp + "&page=" + numPage;
-            string strJson = await hc.GetStringAsync(new Uri(strUrl));
-            JsonObject jo = JsonObject.Parse(strJson);
-            JsonArray threadsArray = jo["Variables"].GetObject()["forum_threadlist"].GetArray();
-            int numThreads = threadsArray.Count;
-            List<Structures.Thread> result = new List<Structures.Thread>();
+            var strUrl = strUrlBaseApi + strThreadList + "&fid=" + fid + "&tpp=" + tpp + "&page=" + numPage;
+            var strJson = await hc.GetStringAsync(new Uri(strUrl));
+            var jo = JsonObject.Parse(strJson);
+            var threadsArray = jo["Variables"].GetObject()["forum_threadlist"].GetArray();
+            var numThreads = threadsArray.Count;
+            var result = new List<Structures.Thread>();
             arc = strJson;
 
             // sort threads by lastpost time in descending order
-            Helpers.ComparableJsonContainer[] threads = new Helpers.ComparableJsonContainer[numThreads];
-            for(int i = 0;i < numThreads;i++)
+            var threads = new Helpers.ComparableJsonContainer[numThreads];
+            for(var i = 0;i < numThreads;i++)
             {
-                JsonObject tmp = threadsArray[i].GetObject();
-                Helpers.ComparableJsonContainer threadTuple = new Helpers.ComparableJsonContainer { obj = tmp, key = int.Parse(tmp["dblastpost"].GetString()) };
+                var tmp = threadsArray[i].GetObject();
+                var threadTuple = new Helpers.ComparableJsonContainer { obj = tmp, key = int.Parse(tmp["dblastpost"].GetString()) };
                 threads[i] = threadTuple;
             }
             IEnumerable<Helpers.ComparableJsonContainer> sortedTTs = threads.OrderByDescending(tuple => tuple.key);
-            foreach (Helpers.ComparableJsonContainer tuple in sortedTTs)
+            foreach (var tuple in sortedTTs)
             {
-                Structures.Thread t = new Structures.Thread();
+                var t = new Structures.Thread();
                 /// HtmlUtilities.ConvertToText toooooooooooooooooo slow!
                 t.tid = tuple.obj["tid"].GetString();
                 t.fid = fid.ToString();
@@ -117,33 +117,33 @@ namespace SUWP1.WebClient
 
         public async Task<List<Structures.Post>> getPostList(int tid, int numPage)
         {
-            string strUrl = strUrlBaseApi + strPostList + "&tid=" + tid + "&ppp=" + tpp + "&page=" + numPage;
-            string strJson = await hc.GetStringAsync(new Uri(strUrl));
-            JsonObject jo = JsonObject.Parse(strJson);
-            JsonArray postsArray = jo["Variables"].GetObject()["postlist"].GetArray();
-            int numPosts = postsArray.Count;
-            List<Structures.Post> result = new List<Structures.Post>();
+            var strUrl = strUrlBaseApi + strPostList + "&tid=" + tid + "&ppp=" + tpp + "&page=" + numPage;
+            var strJson = await hc.GetStringAsync(new Uri(strUrl));
+            var jo = JsonObject.Parse(strJson);
+            var postsArray = jo["Variables"].GetObject()["postlist"].GetArray();
+            var numPosts = postsArray.Count;
+            var result = new List<Structures.Post>();
             arc = strJson;
             
             // sort posts by lastpost time in ascending order (earlier in the front)
-            Helpers.ComparableJsonContainer[] posts = new Helpers.ComparableJsonContainer[numPosts];
-            for(int i = 0;i < numPosts;i++)
+            var posts = new Helpers.ComparableJsonContainer[numPosts];
+            for(var i = 0;i < numPosts;i++)
             {
-                JsonObject tmp = postsArray[i].GetObject();
-                Helpers.ComparableJsonContainer postTuple = new Helpers.ComparableJsonContainer { obj = tmp, key = int.Parse(tmp["dbdateline"].GetString()) };
+                var tmp = postsArray[i].GetObject();
+                var postTuple = new Helpers.ComparableJsonContainer { obj = tmp, key = int.Parse(tmp["dbdateline"].GetString()) };
                 posts[i] = postTuple;
             }
             IEnumerable<Helpers.ComparableJsonContainer> sortedTTs = posts.OrderBy(tuple => tuple.key);
-            foreach (Helpers.ComparableJsonContainer tuple in sortedTTs)
+            foreach (var tuple in sortedTTs)
             {
                 // replace all img attachments with real urls
-                string resultTmp = Helpers.AttachSolver.solve(tuple.obj);
+                var resultTmp = Helpers.AttachSolver.solve(tuple.obj);
                 // replace all html char entities
                 resultTmp = Helpers.HtmlHelper.ReplaceHtmlCharEntities(resultTmp);
                 // replace <br> with <br/> and <img ...> with <img .../>
                 resultTmp = Helpers.HtmlHelper.CompleteTags(resultTmp);
 
-                Structures.Post p = new Structures.Post();
+                var p = new Structures.Post();
                 p.htmlMsg = resultTmp;
                 p.strUriAvatar = Helpers.AvatarFactory.getAvatar(tuple.obj["authorid"].GetString(), true);
                 p.strUriAvatar_s = Helpers.AvatarFactory.getAvatar(tuple.obj["authorid"].GetString(), false);

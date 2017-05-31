@@ -32,14 +32,14 @@ namespace SUWP1
             threadsCurrentPage = 1;
             currentTid = 1330359;
             currentFid = 75;
-            Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            this.vmThread = new UI.ViewModelThread();
-            this.vmSubForum = new UI.ViewModelSubForum();
-            this.vmForum = new UI.ViewModelForum();
-            this.lstPosts = new List<Post>();
-            this.lstThreads = new List<Thread>();
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            vmThread = new UI.ViewModelThread();
+            vmSubForum = new UI.ViewModelSubForum();
+            vmForum = new UI.ViewModelForum();
+            lstPosts = new List<Post>();
+            lstThreads = new List<Thread>();
             jh = new WebClient.JsonHandler();
-            HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
+            var filter = new HttpBaseProtocolFilter();
 
             this.Bindings.Update();
         }
@@ -77,7 +77,7 @@ namespace SUWP1
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             var accountReader = ResourceLoader.GetForCurrentView("TestAccount");
-            string cookiesReturn = await jh.login(accountReader.GetString("ID"), accountReader.GetString("PWD"));
+            var cookiesReturn = await jh.login(accountReader.GetString("ID"), accountReader.GetString("PWD"));
             Debug.WriteLine(cookiesReturn);
         }
 
@@ -113,8 +113,8 @@ namespace SUWP1
 
         private async void StackPanel_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            StackPanel sp = sender as StackPanel;
-            Thread t = sp.DataContext as Thread;
+            var sp = sender as StackPanel;
+            var t = sp.DataContext as Thread;
             currentTid = int.Parse(t.tid);
             updatePostList(true);
         }
@@ -129,7 +129,7 @@ namespace SUWP1
             }
             else
             {
-                List<Post> tmp = await jh.getPostList(currentTid, postsCurrentPage++);
+                var tmp = await jh.getPostList(currentTid, postsCurrentPage++);
                 lstPosts.Concat(tmp);
                 vmThread.addPosts(tmp);
             }
@@ -145,7 +145,7 @@ namespace SUWP1
             }
             else
             {
-                List<Thread> tmp = await jh.getThreadList(currentFid, threadsCurrentPage++);
+                var tmp = await jh.getThreadList(currentFid, threadsCurrentPage++);
                 lstThreads.Concat(tmp);
                 vmSubForum.addThreads(tmp);
             }

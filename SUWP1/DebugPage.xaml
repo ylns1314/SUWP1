@@ -47,7 +47,7 @@
                             <!--<TextBlock Grid.Column="1" Name="tbPostMsg" Text="{Binding htmlMsg}"></TextBlock>-->
                             <!--<mt:HtmlView Grid.Column="1" Name="hvConsole" Html="{Binding htmlMsg}" MinHeight="150" Height="auto"></mt:HtmlView>-->
                             <!--<RichTextBlock Grid.Column="1" Name="hvConsole"  MinHeight="150" Height="auto" ui:CustomProperties.Html="{Binding htmlMsg}"></RichTextBlock>-->
-                            <WebView Grid.Column="1" MinHeight="150" Height="auto" Margin="10,0,10,0" ui:CustomProperties.HTMLText="{Binding htmlMsg}" NavigationCompleted="wvPostMsg_NavigationCompleted"></WebView>
+                            <WebView Grid.Column="1" MinHeight="150" Height="auto" Margin="10,0,10,0" ui:HtmlToXamlProperties.HTMLText="{Binding htmlMsg}" NavigationCompleted="wvPostMsg_NavigationCompleted"></WebView>
                         </Grid>
                     </Border>
                 </DataTemplate>
@@ -71,7 +71,7 @@
                             </StackPanel>
                             <!--<TextBlock Name="tbPostMsg" Text="{Binding htmlMsg}"></TextBlock>
                             <mt:HtmlView Grid.Column="1" Name="hvConsole" Html="{Binding htmlMsg}" MinHeight="150" Height="auto"></mt:HtmlView>-->
-                            <RichTextBlock Grid.Column="1"  MinHeight="150" Height="auto" ui:CustomProperties.Html="{x:Bind htmlMsg}" ></RichTextBlock>
+                            <RichTextBlock Grid.Column="1"  MinHeight="150" Height="auto" ui:HtmlToXamlProperties.Html="{x:Bind htmlMsg}" ></RichTextBlock>
                             <!--<WebView Grid.Column="1" MinHeight="150" MaxWidth="{Binding wbPostMaxWidth}" Height="auto" Name="wvPostMsg" Margin="10,0,10,0" ui:CustomProperties.HTMLText="{Binding htmlMsg}" NavigationCompleted="wvPostMsg_NavigationCompleted"></WebView>-->
                         </Grid>
                     </Border>

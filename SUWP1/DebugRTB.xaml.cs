@@ -38,8 +38,8 @@ namespace SUWP1
 
         private async Task<string> getJson()
         {
-            WebClient.JsonHandler jh = new WebClient.JsonHandler();
-            List<Structures.Post> posts = await jh.getPostList(1317876, 1);
+            var jh = new WebClient.JsonHandler();
+            var posts = await jh.getPostList(1317876, 1);
             return posts[posts.Count - 1].htmlMsg;
         }
 
@@ -52,9 +52,9 @@ namespace SUWP1
         {
             console = await this.getJson();
             wbConsole.NavigateToString(console);
-            RichTextBlock rtbConsole = new RichTextBlock();
-            Paragraph p = new Paragraph();
-            Span s = new Span();
+            var rtbConsole = new RichTextBlock();
+            var p = new Paragraph();
+            var s = new Span();
             p.Inlines.Add(new Run() { Text = console });
             rtbConsole.Blocks.Add(p);
             svConsole.Content = rtbConsole;

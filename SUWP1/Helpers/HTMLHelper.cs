@@ -30,7 +30,7 @@ namespace SUWP1.Helpers
             htmlText = htmlText.Replace("&yen;", "¥");
             htmlText = htmlText.Replace("&euro;", "€");
             htmlText = htmlText.Replace("&copy;", "©");
-            htmlText = htmlText.Replace("&quote;", "\"");
+            htmlText = htmlText.Replace("&quot;", "\"");
             htmlText = htmlText.Replace("&reg;", "®");
             return htmlText;
         }
@@ -43,7 +43,7 @@ namespace SUWP1.Helpers
         public static string CompleteTags(string htmlText)
         {
             // regex for all > without /
-            Regex tagQuoteEnd = new Regex(@"(?!\/)>");
+            var tagQuoteEnd = new Regex(@"(?!\/)>");
             htmlText = tagQuoteEnd.Replace(htmlText, "/>");
             return htmlText;
         }

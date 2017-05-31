@@ -60,22 +60,22 @@
                 </ListView>
             </pr:PullToRefreshBox>
             <pr:PullToRefreshBox Name="pullRefreshBoxPost" Grid.Column="2" RefreshInvoked="pullRefreshBoxPost_RefreshInvoked">
-                <ListView Name="lstRTBPostList" Width="auto" ItemsSource="{x:Bind vmThread.posts}"  BorderBrush="#022C80" BorderThickness="0.5,0.5,1,1" Margin="0,0,0,0" SelectionMode="None" AllowDrop="True" DropCompleted="lstRTBPostList_DropCompleted">
+                <ListView Name="lstRTBPostList" Width="auto" ItemsSource="{x:Bind vmThread.posts}"  BorderBrush="#022C80" BorderThickness="0.5,0.5,1,1" Margin="0,0,0,0" SelectionMode="None" AllowDrop="True" DropCompleted="lstRTBPostList_DropCompleted" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="struct:Post">
-                            <Grid BorderBrush="#022C80" BorderThickness="1,0.5,1,0.5" Padding="0" Margin="0" Width="{Binding ActualWidth, ElementName = lstRTBPostList}">
+                            <Grid BorderBrush="#022C80" BorderThickness="1,0.5,1,0.5" Padding="0" Margin="0" Width="{Binding ActualWidth, ElementName = lstRTBPostList}" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="70"/>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" IsTapEnabled="False" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False">
                                     <Image Width="70" Margin="5,5,5,5" Source="{x:Bind strUriAvatar_s}"></Image>
                                     <TextBlock Text="{x:Bind author}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,5"></TextBlock>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                     </StackPanel>
                                 </StackPanel>
                                 <Border BorderBrush="#022C80" BorderThickness="0,1,0,0" Grid.Row="1">
-                                    <RichTextBlock MinHeight="150" Height="auto" TextWrapping="WrapWholeWords" ui:CustomProperties.Html="{x:Bind htmlMsg}" Margin="10,10,10,10" FontFamily="Microsoft JhengHei" ScrollViewer.VerticalScrollBarVisibility="Hidden"></RichTextBlock>
+                                    <RichTextBlock MinHeight="150" Height="auto" TextWrapping="WrapWholeWords" ui:HtmlToXamlProperties.Html="{x:Bind htmlMsg}" Margin="10,10,10,10" FontFamily="Microsoft JhengHei" ScrollViewer.VerticalScrollBarVisibility="Hidden" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False"></RichTextBlock>
                                 </Border>
                                 <!--<WebView Grid.Column="1" MinHeight="150" Height="auto" ui:CustomProperties.HtmlMsg="{x:Bind htmlMsg}" Margin="10,10,0,10"></WebView>-->
                             </Grid>

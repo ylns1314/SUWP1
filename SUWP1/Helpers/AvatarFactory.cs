@@ -24,7 +24,7 @@ namespace SUWP1.Helpers
         static AvatarFactory()
         {
             Debug.WriteLine(ResourceManager.Current.AllResourceMaps.Count);
-            foreach(string key in ResourceManager.Current.AllResourceMaps.Keys)
+            foreach(var key in ResourceManager.Current.AllResourceMaps.Keys)
                 Debug.WriteLine(key);
             loader = ResourceLoader.GetForCurrentView("S1APIs");
             PREFIX = loader.GetString("PREFIX_AVATAR");
@@ -40,7 +40,7 @@ namespace SUWP1.Helpers
         /// <returns>URL of avatar for the given uid</returns>
         public static string getAvatar(string uid, bool middle)
         {
-            string result = uid;
+            var result = uid;
             if (uid.Length < LEN_UID)
                 result = uid.PadLeft(LEN_UID, '0');
             result = result.Substring(0, 3) + '/' + result.Substring(3, 2) + '/' + result.Substring(5, 2) + '/' + result.Substring(7, 2);

@@ -25,22 +25,22 @@ namespace SUWP1.Helpers
 
         public static string solve(JsonObject obj)
         {
-            string result = obj["message"].GetString();
+            var result = obj["message"].GetString();
             if (obj.ContainsKey("imagelist"))
             {
-                JsonArray jaAttachList = obj["imagelist"].GetArray();
-                Dictionary<int, string> dictImgList = new Dictionary<int, string>();
-                int numAttaches = jaAttachList.Count;
-                for (int i = 0; i < numAttaches; i++)
+                var jaAttachList = obj["imagelist"].GetArray();
+                var dictImgList = new Dictionary<int, string>();
+                var numAttaches = jaAttachList.Count;
+                for (var i = 0; i < numAttaches; i++)
                 {
-                    JsonObject tmpObj = obj["attachments"].GetObject()[jaAttachList[i].GetString()].GetObject();
+                    var tmpObj = obj["attachments"].GetObject()[jaAttachList[i].GetString()].GetObject();
                     // non-zero for images
                     if (int.Parse(tmpObj["isimage"].GetString()) != 0)
                     {
                         dictImgList.Add(int.Parse(tmpObj["aid"].GetString()), tmpObj["url"].GetString() + tmpObj["attachment"].GetString());
                     }
                 }
-                string strUrlImg = string.Join("\n", dictImgList);
+                var strUrlImg = string.Join("\n", dictImgList);
                 result = regAttach.Replace(result, (Match match) =>
                     "<img src=\"" + dictImgList[int.Parse(Regex.Match(match.Value, @"\d+").Value)] + "\" />");
             }
@@ -49,7 +49,7 @@ namespace SUWP1.Helpers
 
         public static bool regexTester(string reg, string input)
         {
-            Regex regReg = new Regex(reg);
+            var regReg = new Regex(reg);
             return regReg.IsMatch(input);
         }
     }

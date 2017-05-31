@@ -16,7 +16,7 @@ namespace SUWP1.UI
 
         public void addThreads(List<Thread> lstThreads)
         {
-            foreach (Thread t in lstThreads) threads.Add(t);
+            foreach (var t in lstThreads) threads.Add(t);
         }
     }
 }

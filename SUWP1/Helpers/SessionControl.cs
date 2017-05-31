@@ -25,19 +25,19 @@ namespace SUWP1.Helpers
 
         public static async Task<string> Login(string username, string pwd)
         {
-            HttpMultipartFormDataContent form = new HttpMultipartFormDataContent();
+            var form = new HttpMultipartFormDataContent();
             form.Add(new HttpStringContent(username), "username");
             form.Add(new HttpStringContent(pwd), "password");
-            string url_login_string = loader.GetString("URL_BASE_MOBILE_API") + loader.GetString("URL_LOGIN");
-            Uri url_login = new Uri(url_login_string);
-            HttpResponseMessage response = await hc.PostAsync(url_login,form);
+            var url_login_string = loader.GetString("URL_BASE_MOBILE_API") + loader.GetString("URL_LOGIN");
+            var url_login = new Uri(url_login_string);
+            var response = await hc.PostAsync(url_login,form);
             Debug.WriteLine(response.Content);
             Debug.WriteLine(response.Headers);
-            HttpBaseProtocolFilter filter = new HttpBaseProtocolFilter();
-            HttpCookieCollection cookieCollection = filter.CookieManager.GetCookies(response.RequestMessage.RequestUri);
-            string result = "";
+            var filter = new HttpBaseProtocolFilter();
+            var cookieCollection = filter.CookieManager.GetCookies(response.RequestMessage.RequestUri);
+            var result = "";
             result = cookieCollection.Count + " cookies found.\r\n";
-            foreach (HttpCookie cookie in cookieCollection)
+            foreach (var cookie in cookieCollection)
             {
                 result += "--------------------\r\n";
                 result += "Name: " + cookie.Name + "\r\n";

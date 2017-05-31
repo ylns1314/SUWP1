@@ -16,7 +16,7 @@ namespace SUWP1.UI
 
         public void addPosts(List<Post> lstPosts)
         {
-            foreach (Post p in lstPosts) posts.Add(p);
+            foreach (var p in lstPosts) posts.Add(p);
         }
     }
 }
