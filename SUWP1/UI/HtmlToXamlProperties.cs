@@ -1,24 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml;
 using System.Diagnostics;
-using Windows.Data.Xml.Dom;
-using Windows.Data.Xml.Xsl;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Markup;
-using System.IO;
-using System.Reflection;
-using HtmlAgilityPack;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Shapes;
 using Windows.UI;
-using System.Globalization;
 using Windows.ApplicationModel.Resources;
+using Windows.UI.Notifications;
+using HtmlAgilityPack;
 
 namespace SUWP1.UI
 {
@@ -363,32 +355,40 @@ namespace SUWP1.UI
 
         static void img_ImageFailed(object sender, ExceptionRoutedEventArgs e)
         {
-            var i = 5;
+            var img = sender as Image;
         }
 
         static void img_ImageOpened(object sender, RoutedEventArgs e)
         {
             var img = sender as Image;
             var bimg = img.Source as BitmapImage;
+            Debug.WriteLine("height %d width %d", bimg.PixelHeight, bimg.PixelWidth);
             if (bimg.PixelWidth > 800 || bimg.PixelHeight > 600)
             {
-                img.Width = 800; img.Height = 600;
                 if (bimg.PixelWidth > 800)
                 {
                     img.Width = 800;
                     img.Height = (800.0 / (double)bimg.PixelWidth) * bimg.PixelHeight;
                 }
-                if (img.Height > 600)
-                {
-                    img.Height = 600;
-                    img.Width = (600.0 / (double)img.Height) * img.Width;
-                }
+                // just don't rescale long images
+                //if (img.Height > 600)
+                //{
+                //    img.Height = 600;
+                //    img.Width = (600.0 / (double)img.Height) * img.Width;
+                //}
             }
             else
             {
                 img.Height = bimg.PixelHeight;
                 img.Width = bimg.PixelWidth;
             }
+            //img.Tapped += img_tapped;
+        }
+
+        static void img_tapped(object sender, RoutedEventArgs e)
+        {
+            var img = sender as Image;
+            img.RenderTransform = new ScaleTransform() { ScaleX = 2, ScaleY = 2 };
         }
 
         private static Inline GenerateHyperLink(HtmlNode node)

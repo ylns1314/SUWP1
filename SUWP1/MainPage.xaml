@@ -75,7 +75,7 @@
                                     </StackPanel>
                                 </StackPanel>
                                 <Border BorderBrush="#022C80" BorderThickness="0,1,0,0" Grid.Row="1">
-                                    <RichTextBlock MinHeight="150" Height="auto" TextWrapping="WrapWholeWords" ui:HtmlToXamlProperties.Html="{x:Bind htmlMsg}" Margin="10,10,10,10" FontFamily="Microsoft JhengHei" ScrollViewer.VerticalScrollBarVisibility="Hidden" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False"></RichTextBlock>
+                                        <RichTextBlock MinHeight="150" Height="auto" TextWrapping="WrapWholeWords" ui:HtmlToXamlProperties.Html="{x:Bind htmlMsg}" Margin="10,10,10,10" FontFamily="Microsoft JhengHei" ScrollViewer.VerticalScrollBarVisibility="Hidden" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False"></RichTextBlock>
                                 </Border>
                                 <!--<WebView Grid.Column="1" MinHeight="150" Height="auto" ui:CustomProperties.HtmlMsg="{x:Bind htmlMsg}" Margin="10,10,0,10"></WebView>-->
                             </Grid>
