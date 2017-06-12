@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="SUWP1.DebugRTB"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SUWP1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Name="gridMain">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Name="btnBack" Content="Back" Click="btnBack_Click" Margin="0,0,10,0"></Button>
+            <Button Name="btnDebug" Content="Debug" Click="btnDebug_Click" Margin="0,0,10,0"></Button>
+        </StackPanel>
+
+        <TextBlock Grid.Row="1" Name="tbConsole" Text="{x:Bind console}"></TextBlock>
+        <WebView Grid.Row="2" Name="wbConsole"></WebView>
+        <ScrollViewer Grid.Row="3" Name="svConsole">
+        </ScrollViewer>
+    </Grid>
+</Page>

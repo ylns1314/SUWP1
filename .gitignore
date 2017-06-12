@@ -286,5 +286,5 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
-*.json
+/SUWP1/Assets/*.json
 /SUWP1/Resources/TestAccount.resw
